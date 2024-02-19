@@ -1,6 +1,6 @@
 #include "header.h"
 
-Account account[100];
+Account* account[100];
 int custom_num = 0;
 int q = 1;
 

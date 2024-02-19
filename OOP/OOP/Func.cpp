@@ -1,6 +1,6 @@
 #include "Header.h"
 
-extern Account account[100];
+extern Account* account[100];
 extern int custom_num;
 extern int q;
 
@@ -45,11 +45,16 @@ void SelectMenu(void)
 
 void MakeAccount(void)
 {
+	int accountNum, amount;
+	char name[50];
+
 	cout << "[계좌개설]" << endl;
-	cout << "계좌ID: ", cin >> account[custom_num].accountNum;
-	cout << "이 름: ", cin >> account[custom_num].name;
-	cout << "입금액: ", cin >> account[custom_num++].amount;
+	cout << "계좌ID: ", cin >> accountNum;
+	cout << "이 름: ", cin >> name;
+	cout << "입금액: ", cin >> amount;
 	cout << endl;
+
+	account[custom_num++] = new Account(accountNum, name, amount);
 }
 
 void Deposit(void)
@@ -62,12 +67,8 @@ void Deposit(void)
 
 	for (int i = 0; i < custom_num; i++)
 	{
-		if (account[i].accountNum == accountNum)
-		{
-			account[i].amount += amount;
-			cout << "입금완료" << endl << endl;
+		if (account[i]->Deposit(accountNum, amount))
 			return;
-		}
 	}
 
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
@@ -83,17 +84,8 @@ void Withdraw(void)
 
 	for (int i = 0; i < custom_num; i++)
 	{
-		if (account[i].accountNum == accountNum)
-		{
-			if (account[i].amount < amount)
-				cout << "잔액부족" << endl << endl;
-			else
-			{
-				account[i].amount -= amount;
-				cout << "출금완료" << endl << endl;
-			}
+		if (account[i]->Withdraw(accountNum, amount))
 			return;
-		}
 	}
 
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
@@ -102,9 +94,5 @@ void Withdraw(void)
 void ShowAllAccount(void)
 {
 	for (int i = 0; i < custom_num; i++)
-	{
-		cout << "계좌ID: " << account[i].accountNum << endl;
-		cout << "이 름: " << account[i].name << endl;
-		cout << "잔 액: " << account[i].amount << endl << endl;
-	}
+		account[i]->ShowAllAccount();
 }
