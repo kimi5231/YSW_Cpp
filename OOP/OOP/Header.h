@@ -15,45 +15,44 @@ void ShowAllAccount(void);
 class Account
 {
 private:
-	int accountNum;
+	int ID;
 	char* name;
 	int amount;
 public:
-	Account(int accountNum, const char* name, int amount)
-		: accountNum(accountNum), amount(amount)
+	Account(int ID, const char* name, int amount)
+		: ID(ID), amount(amount)
 	{
 		this->name = new char[strlen(name) + 1];
 		strcpy(this->name, name);
 	}
-	bool Deposit(int accountNum, int amount)
+	Account(const Account &copy)
+		: ID(copy.ID), amount(copy.amount)
 	{
-		if (this->accountNum == accountNum)
-		{
-			this->amount += amount;
-			cout << "입금완료" << endl << endl;
-			return true;
-		}
-		return false;
+		name = new char[strlen(copy.name) + 1];
+		strcpy(name, copy.name);
 	}
-	bool Withdraw(int accountNum, int amount)
+	int GetID(void)
 	{
-		if (this->accountNum == accountNum)
+		return ID;
+	}
+	void Deposit(int amount)
+	{
+		this->amount += amount;
+		cout << "입금완료" << endl << endl;
+	}
+	void Withdraw(int amount)
+	{
+		if (this->amount < amount)
+			cout << "잔액부족" << endl << endl;
+		else
 		{
-			if (this->amount < amount)
-				cout << "잔액부족" << endl << endl;
-			else
-			{
-				this->amount -= amount;
-				cout << "출금완료" << endl << endl;
-			}
-			return true;
+			this->amount -= amount;
+			cout << "출금완료" << endl << endl;
 		}
-
-		return false;
 	}
 	void ShowAllAccount(void) const
 	{
-		cout << "계좌ID: " << accountNum << endl;
+		cout << "계좌ID: " << ID << endl;
 		cout << "이 름: " << name << endl;
 		cout << "잔 액: " << amount << endl << endl;
 	}

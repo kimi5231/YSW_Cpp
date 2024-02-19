@@ -45,30 +45,33 @@ void SelectMenu(void)
 
 void MakeAccount(void)
 {
-	int accountNum, amount;
+	int ID, amount;
 	char name[50];
 
 	cout << "[계좌개설]" << endl;
-	cout << "계좌ID: ", cin >> accountNum;
+	cout << "계좌ID: ", cin >> ID;
 	cout << "이 름: ", cin >> name;
 	cout << "입금액: ", cin >> amount;
 	cout << endl;
 
-	account[custom_num++] = new Account(accountNum, name, amount);
+	account[custom_num++] = new Account(ID, name, amount);
 }
 
 void Deposit(void)
 {
-	int accountNum, amount;
+	int ID, amount;
 
 	cout << "[입   금]" << endl;
-	cout << "계좌ID: ", cin >> accountNum;
+	cout << "계좌ID: ", cin >> ID;
 	cout << "입금액: ", cin >> amount;
 
 	for (int i = 0; i < custom_num; i++)
 	{
-		if (account[i]->Deposit(accountNum, amount))
+		if (account[i]->GetID() == ID)
+		{
+			account[i]->Deposit(amount);
 			return;
+		}
 	}
 
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
@@ -76,16 +79,19 @@ void Deposit(void)
 
 void Withdraw(void)
 {
-	int accountNum, amount;
+	int ID, amount;
 
 	cout << "[출   금]" << endl;
-	cout << "계좌ID: ", cin >> accountNum;
+	cout << "계좌ID: ", cin >> ID;
 	cout << "출금액: ", cin >> amount;
 
 	for (int i = 0; i < custom_num; i++)
 	{
-		if (account[i]->Withdraw(accountNum, amount))
+		if (account[i]->GetID() == ID)
+		{
+			account[i]->Withdraw(amount);
 			return;
+		}
 	}
 
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
