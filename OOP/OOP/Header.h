@@ -31,7 +31,7 @@ public:
 		name = new char[strlen(copy.name) + 1];
 		strcpy(name, copy.name);
 	}
-	int GetID(void)
+	int GetID(void) const
 	{
 		return ID;
 	}
