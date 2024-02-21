@@ -1,15 +1,13 @@
 #include "header.h"
-
-Account* account[100];
-int custom_num = 0;
-int q = 1;
+#include "AccountHandler.h"
 
 int main(void)
 {
-	while (q)
+	AccountHandler handler;
+
+	while (handler.GetQ())
 	{
-		ShowMenu();
-		SelectMenu();
+		handler.ShowMenu();
+		handler.SelectMenu();
 	}
-	return 0;
 }

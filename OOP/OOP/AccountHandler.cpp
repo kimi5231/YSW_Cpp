@@ -1,10 +1,17 @@
-#include "Header.h"
+#include "AccountHandler.h"
 
-extern Account* account[100];
-extern int custom_num;
-extern int q;
+AccountHandler::AccountHandler(void)
+	: custom_num(0), q(true)
+{
 
-void ShowMenu(void)
+}
+
+bool AccountHandler::GetQ(void) const
+{
+	return q;
+}
+
+void AccountHandler::ShowMenu(void)
 {
 	cout << "-----Menu-----" << endl;
 	cout << "1. 계좌개설" << endl;
@@ -14,7 +21,7 @@ void ShowMenu(void)
 	cout << "5. 프로그램 종료" << endl;
 }
 
-void SelectMenu(void)
+void AccountHandler::SelectMenu(void)
 {
 	int comm;
 
@@ -36,14 +43,14 @@ void SelectMenu(void)
 		ShowAllAccount();
 		break;
 	case 5:
-		q = 0;
+		q = false;
 		break;
 	default:
 		break;
 	}
 }
 
-void MakeAccount(void)
+void AccountHandler::MakeAccount(void)
 {
 	int ID, amount;
 	char name[50];
@@ -57,7 +64,7 @@ void MakeAccount(void)
 	account[custom_num++] = new Account(ID, name, amount);
 }
 
-void Deposit(void)
+void AccountHandler::Deposit(void)
 {
 	int ID, amount;
 
@@ -77,7 +84,7 @@ void Deposit(void)
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
 }
 
-void Withdraw(void)
+void AccountHandler::Withdraw(void)
 {
 	int ID, amount;
 
@@ -97,8 +104,14 @@ void Withdraw(void)
 	cout << "유효하지 않은 ID 입니다." << endl << endl;
 }
 
-void ShowAllAccount(void)
+void AccountHandler::ShowAllAccount(void) const
 {
 	for (int i = 0; i < custom_num; i++)
 		account[i]->ShowAllAccount();
+}
+
+AccountHandler::~AccountHandler()
+{
+	for (int i = 0; i < custom_num; i++)
+		delete[]account[i];
 }
