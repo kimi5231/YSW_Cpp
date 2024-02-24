@@ -13,15 +13,10 @@ public:
 	{
 		cout << "[" << xpos << ", " << ypos << "]" << endl;
 	}
-	Point operator-(void)
-	{
-		Point pos(-xpos, -ypos);
-		return pos;
-	}
-	friend Point operator~(Point& ref);
+	friend Point operator~(Point&ref);
 };
 
-Point operator~(Point& ref)
+Point operator~(Point&ref)
 {
 	Point pos(~ref.xpos, ~ref.ypos);
 	return pos;
@@ -30,15 +25,9 @@ Point operator~(Point& ref)
 int main(void)
 {
 	Point pos1(3, 4);
-	Point pos2 = -pos1;
+	Point pos2 = ~pos1;
 
 	pos1.ShowPosition();
 	pos2.ShowPosition();
-	cout << endl;
-
-	pos2 = ~pos1;
-	pos1.ShowPosition();
-	pos2.ShowPosition();
-
 	return 0;
 }
