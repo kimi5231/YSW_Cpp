@@ -1,6 +1,7 @@
 #pragma once
-#include "Header.h"
 #include "Account.h"
+#include "NormalAccount.h"
+#include "HighCreditAccount.h"
 
 class AccountHandler
 {
@@ -13,7 +14,9 @@ public:
 	bool GetQ(void) const;
 	void ShowMenu(void);
 	void SelectMenu(void);
-	void MakeAccount(void);
+	void SelectAccountKind(void);
+	void MakeNormalAccount(void);
+	void MakeHighCreditAccount(void);
 	void Deposit(void);
 	void Withdraw(void);
 	void ShowAllAccount(void) const;

@@ -11,8 +11,8 @@ public:
 	Account(int ID, const char* name, int amount);
 	Account(const Account& copy);
 	int GetID(void) const;
-	void Deposit(int amount);
+	virtual void Deposit(int amount);
 	void Withdraw(int amount);
-	void ShowAllAccount(void) const;
+	void ShowAccount(void) const;
 	~Account();
 };

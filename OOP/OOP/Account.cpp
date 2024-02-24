@@ -36,7 +36,7 @@ void Account::Withdraw(int amount)
 	}
 }
 
-void Account::ShowAllAccount(void) const
+void Account::ShowAccount(void) const
 {
 	cout << "°èÁÂID: " << ID << endl;
 	cout << "ÀÌ ¸§: " << name << endl;

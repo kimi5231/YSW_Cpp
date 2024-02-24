@@ -31,7 +31,7 @@ void AccountHandler::SelectMenu(void)
 	switch (comm)
 	{
 	case 1:
-		MakeAccount();
+		SelectAccountKind();
 		break;
 	case 2:
 		Deposit();
@@ -46,22 +46,62 @@ void AccountHandler::SelectMenu(void)
 		q = false;
 		break;
 	default:
+		cout << "잘못된 입력입니다. 다시 입력해주세요." << endl << endl;
 		break;
 	}
 }
 
-void AccountHandler::MakeAccount(void)
+void AccountHandler::SelectAccountKind(void)
 {
-	int ID, amount;
+	int comm;
+
+	cout << "[계좌종류선택]" << endl;
+	cout << "1.보통예금계좌 2.신용신뢰계좌" << endl;
+	cout << "선택: "; cin >> comm;
+	
+	switch (comm)
+	{
+	case 1:
+		MakeNormalAccount();
+		break;
+	case 2:
+		MakeHighCreditAccount();
+		break;
+	default:
+		cout << "잘못된 입력입니다. 다시 입력해주세요." << endl << endl;
+		break;
+	}
+}
+
+void AccountHandler::MakeNormalAccount(void)
+{
+	int ID, amount, rate;
 	char name[50];
 
-	cout << "[계좌개설]" << endl;
+	cout << "[보통예금계좌 개설]" << endl;
 	cout << "계좌ID: ", cin >> ID;
 	cout << "이 름: ", cin >> name;
 	cout << "입금액: ", cin >> amount;
+	cout << "이자율: ", cin >> rate;
 	cout << endl;
 
-	account[custom_num++] = new Account(ID, name, amount);
+	account[custom_num++] = new NormalAccount(ID, name, amount, rate);
+}
+
+void AccountHandler::MakeHighCreditAccount(void)
+{
+	int ID, amount, rate, credit;
+	char name[50];
+
+	cout << "[신용신뢰계좌 개설]" << endl;
+	cout << "계좌ID: ", cin >> ID;
+	cout << "이 름: ", cin >> name;
+	cout << "입금액: ", cin >> amount;
+	cout << "이자율: ", cin >> rate;
+	cout << "신용등급(1toA, 2toB, 3toC): ", cin >> credit;
+	cout << endl;
+
+	account[custom_num++] = new HighCreditAccount(ID, name, amount, rate, credit);
 }
 
 void AccountHandler::Deposit(void)
@@ -107,7 +147,7 @@ void AccountHandler::Withdraw(void)
 void AccountHandler::ShowAllAccount(void) const
 {
 	for (int i = 0; i < custom_num; i++)
-		account[i]->ShowAllAccount();
+		account[i]->ShowAccount();
 }
 
 AccountHandler::~AccountHandler()
