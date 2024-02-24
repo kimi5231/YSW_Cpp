@@ -1,5 +1,5 @@
 #pragma once
-#include "Header.h"
+#include "BankingCommonDecl.h"
 
 class Account
 {
