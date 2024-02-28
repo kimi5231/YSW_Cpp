@@ -14,5 +14,6 @@ public:
 	virtual void Deposit(int amount);
 	void Withdraw(int amount);
 	void ShowAccount(void) const;
+	Account& operator=(const Account& ref);
 	~Account();
 };

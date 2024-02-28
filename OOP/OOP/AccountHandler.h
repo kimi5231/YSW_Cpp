@@ -1,12 +1,12 @@
 #pragma once
-#include "Account.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
+#include "AccountArray.h"
 
 class AccountHandler
 {
 private:
-	Account* account[100];
+	AccountArray account;
 	int custom_num;
 	bool q;
 public:

@@ -43,6 +43,19 @@ void Account::ShowAccount(void) const
 	cout << "ภÜ พื: " << amount << endl << endl;
 }
 
+Account& Account::operator=(const Account& ref)
+{
+	if (name != NULL)
+		delete []name;
+
+	ID = ref.ID;
+	name = new char[strlen(ref.name) + 1];
+	strcpy(name, ref.name);
+	amount = ref.amount;
+
+	return *this;
+}
+
 Account::~Account()
 {
 	delete[]name;
