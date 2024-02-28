@@ -6,7 +6,7 @@ class HighCreditAccount : public NormalAccount
 private:
 	int creditLevel;
 public:
-	HighCreditAccount(int ID, const char* name, int amount, int rate, int credit)
+	HighCreditAccount(int ID, const String name, int amount, int rate, int credit)
 		:NormalAccount(ID, name, amount, rate), creditLevel(credit)
 	{}
 	virtual void Deposit(int amount)

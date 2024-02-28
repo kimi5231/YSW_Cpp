@@ -1,4 +1,5 @@
 #include "AccountHandler.h"
+#include "String.h"
 
 AccountHandler::AccountHandler(void)
 	: custom_num(0), q(true)
@@ -76,7 +77,7 @@ void AccountHandler::SelectAccountKind(void)
 void AccountHandler::MakeNormalAccount(void)
 {
 	int ID, amount, rate;
-	char name[50];
+	String name;
 
 	cout << "[º¸Åë¿¹±Ý°èÁÂ °³¼³]" << endl;
 	cout << "°èÁÂID: ", cin >> ID;
@@ -91,7 +92,7 @@ void AccountHandler::MakeNormalAccount(void)
 void AccountHandler::MakeHighCreditAccount(void)
 {
 	int ID, amount, rate, credit;
-	char name[50];
+	String name;
 
 	cout << "[½Å¿ë½Å·Ú°èÁÂ °³¼³]" << endl;
 	cout << "°èÁÂID: ", cin >> ID;

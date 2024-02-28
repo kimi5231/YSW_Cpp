@@ -1,18 +1,17 @@
 #include "Account.h"
 
-Account::Account(int ID, const char* name, int amount)
+Account::Account(int ID, const String name, int amount)
 	: ID(ID), amount(amount)
 {
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 }
 
-Account::Account(const Account& copy)
-	: ID(copy.ID), amount(copy.amount)
-{
-	name = new char[strlen(copy.name) + 1];
-	strcpy(name, copy.name);
-}
+//Account::Account(const Account& copy)
+//	: ID(copy.ID), amount(copy.amount)
+//{
+//	name = new char[strlen(copy.name) + 1];
+//	strcpy(name, copy.name);
+//}
 
 int Account::GetID(void) const
 {
@@ -43,20 +42,20 @@ void Account::ShowAccount(void) const
 	cout << "ภÜ พื: " << amount << endl << endl;
 }
 
-Account& Account::operator=(const Account& ref)
-{
-	if (name != NULL)
-		delete []name;
+//Account& Account::operator=(const Account& ref)
+//{
+//	if (name != NULL)
+//		delete []name;
+//
+//	ID = ref.ID;
+//	name = new char[strlen(ref.name) + 1];
+//	strcpy(name, ref.name);
+//	amount = ref.amount;
+//
+//	return *this;
+//}
 
-	ID = ref.ID;
-	name = new char[strlen(ref.name) + 1];
-	strcpy(name, ref.name);
-	amount = ref.amount;
-
-	return *this;
-}
-
-Account::~Account()
-{
-	delete[]name;
-}
+//Account::~Account()
+//{
+//	delete[]name;
+//}
