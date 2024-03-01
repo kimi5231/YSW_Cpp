@@ -6,13 +6,6 @@ Account::Account(int ID, const String name, int amount)
 	this->name = name;
 }
 
-//Account::Account(const Account& copy)
-//	: ID(copy.ID), amount(copy.amount)
-//{
-//	name = new char[strlen(copy.name) + 1];
-//	strcpy(name, copy.name);
-//}
-
 int Account::GetID(void) const
 {
 	return ID;
@@ -27,12 +20,10 @@ void Account::Deposit(int amount)
 void Account::Withdraw(int amount)
 {
 	if (this->amount < amount)
-		cout << "잔액부족" << endl << endl;
-	else
-	{
-		this->amount -= amount;
-		cout << "출금완료" << endl << endl;
-	}
+		throw WithdrawException(this->amount);
+
+	this->amount -= amount;
+	cout << "출금완료" << endl << endl;
 }
 
 void Account::ShowAccount(void) const
@@ -41,6 +32,13 @@ void Account::ShowAccount(void) const
 	cout << "이 름: " << name << endl;
 	cout << "잔 액: " << amount << endl << endl;
 }
+
+//Account::Account(const Account& copy)
+//	: ID(copy.ID), amount(copy.amount)
+//{
+//	name = new char[strlen(copy.name) + 1];
+//	strcpy(name, copy.name);
+//}
 
 //Account& Account::operator=(const Account& ref)
 //{

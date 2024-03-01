@@ -1,5 +1,4 @@
 #include "AccountHandler.h"
-#include "String.h"
 
 AccountHandler::AccountHandler(void)
 	: custom_num(0), q(true)
@@ -111,18 +110,33 @@ void AccountHandler::Deposit(void)
 
 	cout << "[입   금]" << endl;
 	cout << "계좌ID: ", cin >> ID;
-	cout << "입금액: ", cin >> amount;
 
-	for (int i = 0; i < custom_num; i++)
+	while (1)
 	{
-		if (account[i]->GetID() == ID)
+		cout << "입금액: ", cin >> amount;
+
+		try
 		{
-			account[i]->Deposit(amount);
+			if (amount <= 0)
+				throw DepositException(amount);
+
+			for (int i = 0; i < custom_num; i++)
+			{
+				if (account[i]->GetID() == ID)
+				{
+					account[i]->Deposit(amount);
+					return;
+				}
+			}
+
+			cout << "유효하지 않은 ID 입니다." << endl << endl;
 			return;
 		}
+		catch (DepositException& expn)
+		{
+			expn.ShowExceptionReasonWithValue();
+		}
 	}
-
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
 }
 
 void AccountHandler::Withdraw(void)
@@ -131,18 +145,36 @@ void AccountHandler::Withdraw(void)
 
 	cout << "[출   금]" << endl;
 	cout << "계좌ID: ", cin >> ID;
-	cout << "출금액: ", cin >> amount;
 
-	for (int i = 0; i < custom_num; i++)
+	while (1)
 	{
-		if (account[i]->GetID() == ID)
+		cout << "출금액: ", cin >> amount;
+
+		try
 		{
-			account[i]->Withdraw(amount);
+			if (amount <= 0)
+				throw WithdrawException(amount);
+
+			for (int i = 0; i < custom_num; i++)
+			{
+				if (account[i]->GetID() == ID)
+				{
+					account[i]->Withdraw(amount);
+					return;
+				}
+			}
+
+			cout << "유효하지 않은 ID 입니다." << endl << endl;
 			return;
 		}
+		catch (WithdrawException& expn)
+		{
+			if (amount <= 0)
+				expn.ShowExceptionReasonWithValue();
+			else
+				expn.ShowExceptionReasonWithAmount();
+		}
 	}
-
-	cout << "유효하지 않은 ID 입니다." << endl << endl;
 }
 
 void AccountHandler::ShowAllAccount(void) const

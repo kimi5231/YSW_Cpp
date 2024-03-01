@@ -1,8 +1,9 @@
 #pragma once
-#include "Account.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
 #include "BoundCheckArray.h"
+#include "String.h"
+#include "ExceptionClass.h"
 
 class AccountHandler
 {
